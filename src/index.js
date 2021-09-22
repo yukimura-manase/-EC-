@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import reducer from './reducers'; // 結合されたreducerをimport
 import './index.css';
-import App from './App';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
+const store = createStore(reducer) // Storeを作ってreducer機能を格納！
+
+// AppをStore機能を持ったProviderで包んで、子コンポーネントのどこからでもStore機能を使えるようにしている。
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
